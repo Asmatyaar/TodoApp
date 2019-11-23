@@ -3,7 +3,9 @@ let mongodb = require("mongodb");
 
 let app = express();
 let db
+app.use(express.static("public"))
 app.use(express.urlencoded({extended:false}));
+app.use(express.json())
 
 connectionString = "mongodb+srv://app:11223344@cluster0-jt6rh.mongodb.net/item?retryWrites=true&w=majority"
 mongodb.connect(connectionString , {useNewUrlParser:true} , (err , client)=>{
@@ -57,7 +59,8 @@ app.get("/", (req , res)=>{
     </ul>
     
   </div>
-  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src = "browser.js"></script>
 </body>
 </html>
 `)
@@ -72,3 +75,6 @@ app.post("/create", (req, res)=>{
   
   
 })
+  app.post("/update", (req,res)=>{
+    console.log(req.body.text)
+  })
